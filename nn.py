@@ -1711,15 +1711,26 @@ def create_sk_bar_chart(chart_df):
         fig.update_traces(
             texttemplate='%{text:.2f}%',
             textposition='outside',
-            textfont=dict(size=12)
+            textfont=dict(size=12),
+            marker_line_width=1   # 추가: 막대 외곽선 두께로 선명도 향상
         )
     
+    # UI/UX 개선 부분 추가
     fig.update_layout(
+        margin=dict(l=50, r=50, t=70, b=70),  # 여백 확대하여 UI 여유 공간 확보
         yaxis=dict(title="수치", title_font_size=14, tickfont=dict(size=12)),
         xaxis=dict(title="재무 지표", tickangle=45, title_font_size=14, tickfont=dict(size=12)),
-        legend=dict(font=dict(size=12)),
-        title_font_size=16,
-        font=dict(size=12)
+        legend=dict(
+            font=dict(size=12),
+            orientation='h',
+            yanchor='bottom',
+            y=-0.3,
+            xanchor='center',
+            x=0.5
+        ),  # 범례를 하단 중앙으로 배치해 공간 효율성 증가
+        title_font_size=18,  # 제목 크기 키움
+        font=dict(size=12),
+        plot_bgcolor='white'  # 배경을 흰색으로 지정해 깔끔한 느낌 추가
     )
     
     return fig
@@ -1794,7 +1805,8 @@ def create_sk_radar_chart(chart_df):
             font=dict(size=14)
         ),
         title_font_size=20,
-        font=dict(size=14)
+        font=dict(size=14),
+        margin=dict(t=60, b=40)  # 추가: 상하 여백으로 제목과 범례 간격 조정
     )
     
     return fig
@@ -1870,10 +1882,15 @@ def create_quarterly_trend_chart(quarterly_df):
         height=600,
         hovermode='x unified',
         legend=dict(
-            font=dict(size=14)
+            font=dict(size=14),
+            orientation='h',
+            y=-0.2,
+            x=0.5,
+            xanchor='center'
         ),
         title_font_size=20,
-        font=dict(size=14)
+        font=dict(size=14),
+        margin=dict(t=60, b=50)  # 추가: 여백으로 차트가 답답해보이지 않게 조정
     )
     
     return fig
